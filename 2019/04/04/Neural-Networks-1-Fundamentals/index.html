@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="Main ideaTake in an input, process the information(for example: $z = w * x + b$), give an output(for example using activation functions).   PerceptronAn artificial neurons, the basic unit of a neural">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-04T18:26:26.825Z">
+<meta property="og:updated_time" content="2019-04-04T18:29:41.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Networks: 1. Fundamentals">
 <meta name="twitter:description" content="Main ideaTake in an input, process the information(for example: $z = w * x + b$), give an output(for example using activation functions).   PerceptronAn artificial neurons, the basic unit of a neural">
@@ -301,11 +301,11 @@
       
         <h2 id="Main-idea"><a href="#Main-idea" class="headerlink" title="Main idea"></a>Main idea</h2><p>Take in an input, process the information(for example: $z = w * x + b$), give an output(for example using activation functions).  </p>
 <h2 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h2><p>An artificial neurons, the basic unit of a neural network, each takes in an input data and decides how to react to(categorize) that data.  </p>
-<h2 id="Weights-and-bias"><a href="#Weights-and-bias" class="headerlink" title="Weights and bias"></a>Weights and bias</h2><p>The input of the perceptron will be multiplied by a weight value, this weight will be tuned later for a better result w.r.t. the output evaluation.  </p>
-<p>Higher weight means the network considers that input is more important.  </p>
-<p>The bias is a value which will be added to the multiplied result, also tunable.  </p>
-<h2 id="Activation-function"><a href="#Activation-function" class="headerlink" title="Activation function"></a>Activation function</h2><p>Activation functions are functions which decide the output of the node.<br>The most common activation functions are: Sigmoid , ReLu , Tanh  and softmax, where the first three activation functions follow the formulas below and the softmax function (see below) is used for the multi-class classifications and output the possibility of this result.<br>Sigmoid: $f(z) = \frac{1}{1 + e^{-z}}$<br>Relu:    $f(z) = \max(0, z)$<br>tanh:    $f(z) = \tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}$  </p>
-<h2 id="Softmax-function"><a href="#Softmax-function" class="headerlink" title="Softmax function"></a>Softmax function</h2><p>The softmax function is also called normalized exponential function, it is used for transforming the from the model calculated value into the probability distribution of the different classes.<br>For example, a model needs to predict the color of the input and there are three options: red, green and blue. The output value from the model of this three options are: $2$, $9$ and $0$, now the model needs to transform the value into the probability for the further prediction, the corresponding distribution of the probability has the following rules:  </p>
+<h2 id="Weights-and-bias"><a href="#Weights-and-bias" class="headerlink" title="Weights and bias"></a>Weights and bias</h2><ul>
+<li>The input of the perceptron will be multiplied by a weight value, this weight will be tuned later for a better result w.r.t. the output evaluation.  </li>
+<li>Higher weight means the network considers that input is more important.  </li>
+<li>The bias is a value which will be added to the multiplied result, also tunable.  <h2 id="Activation-function"><a href="#Activation-function" class="headerlink" title="Activation function"></a>Activation function</h2>Activation functions are functions which decide the output of the node.<br>The most common activation functions are: Sigmoid , ReLu , Tanh  and softmax, where the first three activation functions follow the formulas below and the softmax function (see below) is used for the multi-class classifications and output the possibility of this result.<br>Sigmoid: $f(z) = \frac{1}{1 + e^{-z}}$<br>Relu:    $f(z) = \max(0, z)$<br>tanh:    $f(z) = \tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}$  <h2 id="Softmax-function"><a href="#Softmax-function" class="headerlink" title="Softmax function"></a>Softmax function</h2>The softmax function is also called normalized exponential function, it is used for transforming the from the model calculated value into the probability distribution of the different classes.<br>For example, a model needs to predict the color of the input and there are three options: red, green and blue. The output value from the model of this three options are: $2$, $9$ and $0$, now the model needs to transform the value into the probability for the further prediction, the corresponding distribution of the probability has the following rules:  </li>
+</ul>
 <ol>
 <li>The probability needs to be positive.  </li>
 <li>The summary of the probability should be equal to $1$.  </li>
