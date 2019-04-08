@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/Neural-Networks-1-Fundamentals/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/Neural-Networks-1-Fundamentals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dongzhen Huangfu">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/04/Neural-Networks-1-Fundamentals/" itemprop="url">Udacity Self-driving Car - Neural Networks: 1. Fundamentals</a></h1>
+                <a class="post-title-link" href="/2019/04/08/Neural-Networks-1-Fundamentals/" itemprop="url">Udacity Self-driving Car - Neural Networks: 1. Fundamentals</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-04T16:47:29+02:00">
-                2019-04-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-08T11:02:29+02:00">
+                2019-04-08
               </time>
             
 
@@ -316,12 +316,12 @@
 </ol>
 <p>To achieve this, the transformation can be realized by the equation:  </p>
 <script type="math/tex; mode=display">P(A_i) = \frac{e^{Z_i}}{\sum^{n}_{j=1} e^{Z_j}}</script><p>Where $P(A_i)$ is the probability for classifying this input to the Class $A_i$, $Z_i$ is the output value from the model of the $i$th class, $n$ is the number of the classes.<br>For the prediction, the model classifies the input to the class with the maximum probability.</p>
-<h2 id="A-simple-example-for-Perception-Algorithm"><a href="#A-simple-example-for-Perception-Algorithm" class="headerlink" title="A simple example for Perception Algorithm"></a>A simple example for Perception Algorithm</h2><h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Find a line <script type="math/tex">w * x + b * y + c = 0</script> that separates the samples.</p>
+<h2 id="Perception-Algorithm"><a href="#Perception-Algorithm" class="headerlink" title="Perception Algorithm"></a>Perception Algorithm</h2><h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Find a line <script type="math/tex">w * x + b * y + c = 0</script> that separates the samples.</p>
 <h4 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h4><ul>
 <li>Start with random weights and bias: a, b, c.  </li>
 <li>For every misclassified points:  <ul>
-<li>If the point is under the line: $a += \alpha <em> x_i%, $b += \alpha </em> y_i$, $c += \alpha$.  </li>
-<li>If the point is above the line: $a -= \alpha <em> x_i%, $b -= \alpha </em> y_i$, $c -= \alpha$.  </li>
+<li>If the point is under the line: <script type="math/tex">a += \alpha * x_i%, $b += \alpha * y_i$, $c += \alpha</script>.  </li>
+<li>If the point is above the line: <script type="math/tex">a -= \alpha * x_i%, $b -= \alpha * y_i$, $c -= \alpha</script>.  </li>
 </ul>
 </li>
 </ul>
@@ -337,8 +337,21 @@
 <li>Calculate the error. </li>
 <li>Minimize the error, and obtain a better model.  </li>
 </ol>
-<h2 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h2><h4 id="Main-idea-1"><a href="#Main-idea-1" class="headerlink" title="Main idea:"></a>Main idea:</h4><p>Take the negative of the gradient of the error function as the moving direction, use the learning rate to avoid dramatic changes.</p>
-<script type="math/tex; mode=display">w_{i}' -= \alpha * \frac{\partial E}{\partial w_i}</script>
+<h2 id="Gradient-Descent-Algorithm"><a href="#Gradient-Descent-Algorithm" class="headerlink" title="Gradient Descent Algorithm"></a>Gradient Descent Algorithm</h2><h4 id="Main-idea-1"><a href="#Main-idea-1" class="headerlink" title="Main idea:"></a>Main idea:</h4><p>Take the negative of the gradient of the error function as the moving direction, use the learning rate to avoid dramatic changes.</p>
+<script type="math/tex; mode=display">w_{i}' -= \alpha * \frac{\partial E}{\partial w_i}</script><p>Where $w_i$ means the i-th weight, and $E$ means the error.  </p>
+<h2 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h2><h4 id="Main-idea-2"><a href="#Main-idea-2" class="headerlink" title="Main idea"></a>Main idea</h4><p>The linear combination of the output from the last models (cells).  </p>
+<h4 id="Feedforward"><a href="#Feedforward" class="headerlink" title="Feedforward"></a>Feedforward</h4><p>Take input, get the output of each layers.</p>
+<h4 id="Mathematical-Knowledges"><a href="#Mathematical-Knowledges" class="headerlink" title="Mathematical Knowledges:"></a>Mathematical Knowledges:</h4><p><a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces/vectors/v/vector-introduction-linear-algebra" target="_blank" rel="noopener">Introduction to vectors</a><br><a href="https://www.khanacademy.org/math/precalculus/precalc-matrices" target="_blank" rel="noopener">Introduction to matrices</a><br><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction" target="_blank" rel="noopener">Chain rules</a>  </p>
+<h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><h4 id="Main-idea-3"><a href="#Main-idea-3" class="headerlink" title="Main idea"></a>Main idea</h4><p>Update the parameters in each layers with regard to the error function.<br>Gradient of the error function:</p>
+<script type="math/tex; mode=display">\nabla E = (\frac{\partial E}{\partial w_{11}}, ... , \frac{\partial E}{\partial w_{mn}}, \frac{\partial E}{\partial b_1}, ... , \frac{\partial E}{\partial b_m})</script><h4 id="Main-steps"><a href="#Main-steps" class="headerlink" title="Main steps"></a>Main steps</h4><ol>
+<li>Doing a feedforward operation.  </li>
+<li>Comparing the output of the model with the desired output and calculating the error.  </li>
+<li>Running the feedforward operation backwards (backpropagation) to spread the error to each of the weights.  </li>
+<li>Use this to update the weights, and get a better model.  </li>
+<li>Continue this until we have a model that is good.  </li>
+</ol>
+<h2 id="Further-Reading"><a href="#Further-Reading" class="headerlink" title="Further Reading"></a>Further Reading</h2><p><a href="https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b#.vt3ax2kg9" target="_blank" rel="noopener">Yes, you should understand backprop</a><br><a href="https://www.youtube.com/watch?v=59Hbtz7XgjM" target="_blank" rel="noopener">a lecture from Stanford’s CS231n course</a>  </p>
+
           
         
       
