@@ -88,7 +88,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_1_pooling.png">
 <meta property="og:image" content="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_2_maxpooling.png">
-<meta property="og:updated_time" content="2019-04-12T08:44:42.703Z">
+<meta property="og:updated_time" content="2019-04-12T09:01:21.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Udacity Self-Driving Car - Neural Networks: 3. Deep Neural Networks">
 <meta name="twitter:description" content="Logistic ClassifierA linear classifier, it takes in the inputs and applies the linear function to them to generate the predictions (classifications).">
@@ -310,11 +310,11 @@
 </ul>
 <h2 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross-Validation"></a>Cross-Validation</h2><p>See <a href="https://towardsdatascience.com/cross-validation-70289113a072" target="_blank" rel="noopener">here</a></p>
 <h2 id="Stochastic-Gradient-Descent-SGD"><a href="#Stochastic-Gradient-Descent-SGD" class="headerlink" title="Stochastic Gradient Descent (SGD)"></a>Stochastic Gradient Descent (SGD)</h2><p>Estimate with a random, small part of the training data (1-1000). Compute the lost and the derivative for this sample and update the parameters with this derivative as the direction for the gradient descent.</p>
-<h4 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h4><p>Keep a running average of the gradient and use that running average instead of the direction of the current batch of the data.  </p>
+<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>Keep a running average of the gradient and use that running average instead of the direction of the current batch of the data.  </p>
 <ul>
 <li>Better convergence.</li>
 </ul>
-<h4 id="Hyper-parameters"><a href="#Hyper-parameters" class="headerlink" title="Hyper-parameters"></a>Hyper-parameters</h4><ul>
+<h3 id="Hyper-parameters"><a href="#Hyper-parameters" class="headerlink" title="Hyper-parameters"></a>Hyper-parameters</h3><ul>
 <li>Initial learning rate  </li>
 <li>Learning rate decay  </li>
 <li>Momentum  </li>
@@ -322,9 +322,9 @@
 <li>Weight initialization  </li>
 </ul>
 <p>Reduce the learning rate can be helpful if the thing goes not well!  </p>
-<h4 id="ADAGRAD"><a href="#ADAGRAD" class="headerlink" title="ADAGRAD"></a>ADAGRAD</h4><p>A optimized SGD, which chooses the initial learning rate, learning rate decay and momentum for you.  </p>
+<h3 id="ADAGRAD"><a href="#ADAGRAD" class="headerlink" title="ADAGRAD"></a>ADAGRAD</h3><p>An optimized SGD, which chooses the initial learning rate, learning rate decay and momentum for you.  </p>
 <h2 id="Mini-Batching"><a href="#Mini-Batching" class="headerlink" title="Mini-Batching"></a>Mini-Batching</h2><p>A technique for training on subsets of the dataset instead of all the data at one time. This provides the ability to train a model, even if a computer lacks the memory to store the entire dataset.  </p>
-<h4 id="Combination-with-SGD"><a href="#Combination-with-SGD" class="headerlink" title="Combination with SGD"></a>Combination with SGD</h4><p> Randomly shuffle the data at the start of each epoch, then create the mini-batches. For each mini-batch, you train the network weights with gradient descent. Since these batches are random, you’re performing SGD with each batch.  </p>
+<h3 id="Combination-with-SGD"><a href="#Combination-with-SGD" class="headerlink" title="Combination with SGD"></a>Combination with SGD</h3><p> Randomly shuffle the data at the start of each epoch, then create the mini-batches. For each mini-batch, you train the network weights with gradient descent. Since these batches are random, you’re performing SGD with each batch.  </p>
 <h2 id="Epochs"><a href="#Epochs" class="headerlink" title="Epochs"></a>Epochs</h2><p>An epoch is a single forward and backward pass of the whole dataset. This is used to increase the accuracy of the model without requiring more data.  </p>
 <h2 id="Example-Classify-the-letters-in-the-MNIST-database"><a href="#Example-Classify-the-letters-in-the-MNIST-database" class="headerlink" title="Example: Classify the letters in the MNIST database"></a>Example: Classify the letters in the MNIST database</h2><pre><code># import the data
 from tensorflow.examples.tutorials.mnist import input_data
@@ -385,7 +385,7 @@ with tf.Session() as sess:
             # Run optimization op (backprop) and cost op (to get loss value)
             sess.run(optimizer, feed_dict={x: batch_x, y: batch_y})
 </code></pre><p>Note: The code <code>minst.train.next_batch()</code> returns a subset of the training data.</p>
-<h2 id="Save-and-restore-the-TensorFlow-Models"><a href="#Save-and-restore-the-TensorFlow-Models" class="headerlink" title="Save and restore the TensorFlow Models"></a>Save and restore the TensorFlow Models</h2><h4 id="Save-Variables"><a href="#Save-Variables" class="headerlink" title="Save Variables"></a>Save Variables</h4><pre><code>import tensorflow as tf
+<h2 id="Save-and-restore-the-TensorFlow-Models"><a href="#Save-and-restore-the-TensorFlow-Models" class="headerlink" title="Save and restore the TensorFlow Models"></a>Save and restore the TensorFlow Models</h2><h3 id="Save-Variables"><a href="#Save-Variables" class="headerlink" title="Save Variables"></a>Save Variables</h3><pre><code>import tensorflow as tf
 
 # The file path to save the data
 save_file = &#39;./model.ckpt&#39;
@@ -409,7 +409,7 @@ with tf.Session() as sess:
 
     # Save the model
     saver.save(sess, save_file)
-</code></pre><h4 id="Load-Variables"><a href="#Load-Variables" class="headerlink" title="Load Variables"></a>Load Variables</h4><pre><code># Remove the previous weights and bias
+</code></pre><h3 id="Load-Variables"><a href="#Load-Variables" class="headerlink" title="Load Variables"></a>Load Variables</h3><pre><code># Remove the previous weights and bias
 tf.reset_default_graph()
 
 # Two Variables: weights and bias
@@ -428,7 +428,7 @@ with tf.Session() as sess:
     print(sess.run(weights))
     print(&#39;Bias:&#39;)
     print(sess.run(bias))
-</code></pre><h4 id="Save-Model"><a href="#Save-Model" class="headerlink" title="Save Model"></a>Save Model</h4><pre><code># Remove previous Tensors and Operations
+</code></pre><h3 id="Save-Model"><a href="#Save-Model" class="headerlink" title="Save Model"></a>Save Model</h3><pre><code># Remove previous Tensors and Operations
 tf.reset_default_graph()
 
 from tensorflow.examples.tutorials.mnist import input_data
@@ -498,7 +498,7 @@ with tf.Session() as sess:
     # Save the model
     saver.save(sess, save_file)
     print(&#39;Trained Model Saved.&#39;)
-</code></pre><h4 id="Load-Model"><a href="#Load-Model" class="headerlink" title="Load Model"></a>Load Model</h4><pre><code>saver = tf.train.Saver()
+</code></pre><h3 id="Load-Model"><a href="#Load-Model" class="headerlink" title="Load Model"></a>Load Model</h3><pre><code>saver = tf.train.Saver()
 
 # Launch the graph
 with tf.Session() as sess:
@@ -587,8 +587,8 @@ print(&#39;Loaded Weights and Bias successfully.&#39;)
 <p>\begin{equation}<br>l’ = l + \frac{1}{2}\beta\lVert w \rVert^2_2<br>\label{L2}<br>\end{equation}</p>
 <p>Where $l’$ is the new loss, $l$ is the old loss and $w$ is the weight.  </p>
 <h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>The Dropout unit can be inserted in the network structure, it works like a layer. The layer takes in the input of the former layer, randomly sets some of them as zero and enlarges the other correspondingly. For example if the half of the input values are set as zero, the others will be scaled by a factor $2$. It makes the model “not so concentrate” on a specific feature and become more universal.<br>When evaluating the model, the dropout rate should be set as $1$, which means no dropout will appear. It is because the Dropout layer only works on the training process.<br>See <a href="https://www.tensorflow.org/api_docs/python/tf/nn/dropout" target="_blank" rel="noopener">here</a>.  </p>
-<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><p><code>tf.nn.dropout()</code>  </p>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><pre><code>keep_prob = tf.placeholder(tf.float32) # probability to keep units
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p><code>tf.nn.dropout()</code>  </p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><pre><code>keep_prob = tf.placeholder(tf.float32) # probability to keep units
 
 hidden_layer = tf.add(tf.matmul(features, weights[0]), biases[0])
 hidden_layer = tf.nn.relu(hidden_layer)
@@ -754,7 +754,7 @@ logits = tf.add(tf.matmul(hidden_layer, weights[1]), biases[1])
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic-Classifier"><span class="nav-number">1.</span> <span class="nav-text">Logistic Classifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-validation-and-test-set"><span class="nav-number">2.</span> <span class="nav-text">Training, validation and test set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Validation"><span class="nav-number">3.</span> <span class="nav-text">Cross-Validation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stochastic-Gradient-Descent-SGD"><span class="nav-number">4.</span> <span class="nav-text">Stochastic Gradient Descent (SGD)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Momentum"><span class="nav-number">4.0.1.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">4.0.2.</span> <span class="nav-text">Hyper-parameters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ADAGRAD"><span class="nav-number">4.0.3.</span> <span class="nav-text">ADAGRAD</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Mini-Batching"><span class="nav-number">5.</span> <span class="nav-text">Mini-Batching</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Combination-with-SGD"><span class="nav-number">5.0.1.</span> <span class="nav-text">Combination with SGD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Epochs"><span class="nav-number">6.</span> <span class="nav-text">Epochs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-Classify-the-letters-in-the-MNIST-database"><span class="nav-number">7.</span> <span class="nav-text">Example: Classify the letters in the MNIST database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Save-and-restore-the-TensorFlow-Models"><span class="nav-number">8.</span> <span class="nav-text">Save and restore the TensorFlow Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Save-Variables"><span class="nav-number">8.0.1.</span> <span class="nav-text">Save Variables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Load-Variables"><span class="nav-number">8.0.2.</span> <span class="nav-text">Load Variables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Save-Model"><span class="nav-number">8.0.3.</span> <span class="nav-text">Save Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Load-Model"><span class="nav-number">8.0.4.</span> <span class="nav-text">Load Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Naming-Error"><span class="nav-number">9.</span> <span class="nav-text">Naming Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L2-Regularization"><span class="nav-number">10.</span> <span class="nav-text">L2 Regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">11.</span> <span class="nav-text">Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code"><span class="nav-number">11.0.1.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">11.0.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pooling-Max-pooling-method"><span class="nav-number">12.</span> <span class="nav-text">Pooling/Max-pooling method</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic-Classifier"><span class="nav-number">1.</span> <span class="nav-text">Logistic Classifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-validation-and-test-set"><span class="nav-number">2.</span> <span class="nav-text">Training, validation and test set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Validation"><span class="nav-number">3.</span> <span class="nav-text">Cross-Validation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stochastic-Gradient-Descent-SGD"><span class="nav-number">4.</span> <span class="nav-text">Stochastic Gradient Descent (SGD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Momentum"><span class="nav-number">4.1.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">4.2.</span> <span class="nav-text">Hyper-parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADAGRAD"><span class="nav-number">4.3.</span> <span class="nav-text">ADAGRAD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mini-Batching"><span class="nav-number">5.</span> <span class="nav-text">Mini-Batching</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Combination-with-SGD"><span class="nav-number">5.1.</span> <span class="nav-text">Combination with SGD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Epochs"><span class="nav-number">6.</span> <span class="nav-text">Epochs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-Classify-the-letters-in-the-MNIST-database"><span class="nav-number">7.</span> <span class="nav-text">Example: Classify the letters in the MNIST database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Save-and-restore-the-TensorFlow-Models"><span class="nav-number">8.</span> <span class="nav-text">Save and restore the TensorFlow Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Save-Variables"><span class="nav-number">8.1.</span> <span class="nav-text">Save Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-Variables"><span class="nav-number">8.2.</span> <span class="nav-text">Load Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Save-Model"><span class="nav-number">8.3.</span> <span class="nav-text">Save Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-Model"><span class="nav-number">8.4.</span> <span class="nav-text">Load Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Naming-Error"><span class="nav-number">9.</span> <span class="nav-text">Naming Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L2-Regularization"><span class="nav-number">10.</span> <span class="nav-text">L2 Regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">11.</span> <span class="nav-text">Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">11.1.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">11.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pooling-Max-pooling-method"><span class="nav-number">12.</span> <span class="nav-text">Pooling/Max-pooling method</span></a></li></ol></div>
             
 
           </div>
