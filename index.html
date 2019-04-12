@@ -229,6 +229,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/Udacity-Self-Driving-Car-Neural-Networks-4-Convolutional-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wyatt Huangfu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="皇甫二小">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/12/Udacity-Self-Driving-Car-Neural-Networks-4-Convolutional-Neural-Networks/" itemprop="url">Udacity Self-Driving Car - Neural Networks: 4. Convolutional Neural Networks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-12T10:53:09+02:00">
+                2019-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/Udacity-Self-Driving-Car-Neural-Networks-3-Deep-Neural-Networks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,314 +418,17 @@
 
       
         
-          
-            <h2 id="Logistic-Classifier"><a href="#Logistic-Classifier" class="headerlink" title="Logistic Classifier"></a>Logistic Classifier</h2><p>A linear classifier, it takes in the inputs and applies the linear function to them to generate the predictions (classifications).</p>
-<h2 id="Training-validation-and-test-set"><a href="#Training-validation-and-test-set" class="headerlink" title="Training, validation and test set"></a>Training, validation and test set</h2><ul>
-<li>Training set: Data set for training.  </li>
-<li>Validation set: Data set for judging the model during the training process.  </li>
-<li>Test set: Data set for test the model after the training process.  </li>
-</ul>
-<h2 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross-Validation"></a>Cross-Validation</h2><p>See <a href="https://towardsdatascience.com/cross-validation-70289113a072" target="_blank" rel="noopener">here</a></p>
-<h2 id="Stochastic-Gradient-Descent-SGD"><a href="#Stochastic-Gradient-Descent-SGD" class="headerlink" title="Stochastic Gradient Descent (SGD)"></a>Stochastic Gradient Descent (SGD)</h2><p>Estimate with a random, small part of the training data (1-1000). Compute the lost and the derivative for this sample and update the parameters with this derivative as the direction for the gradient descent.</p>
-<h4 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h4><p>Keep a running average of the gradient and use that running average instead of the direction of the current batch of the data.  </p>
-<ul>
-<li>Better convergence.</li>
-</ul>
-<h4 id="Hyper-parameters"><a href="#Hyper-parameters" class="headerlink" title="Hyper-parameters"></a>Hyper-parameters</h4><ul>
-<li>Initial learning rate  </li>
-<li>Learning rate decay  </li>
-<li>Momentum  </li>
-<li>Batch size  </li>
-<li>Weight initialization  </li>
-</ul>
-<p>Reduce the learning rate can be helpful if the thing goes not well!  </p>
-<h4 id="ADAGRAD"><a href="#ADAGRAD" class="headerlink" title="ADAGRAD"></a>ADAGRAD</h4><p>A optimized SGD, which chooses the initial learning rate, learning rate decay and momentum for you.  </p>
-<h2 id="Mini-Batching"><a href="#Mini-Batching" class="headerlink" title="Mini-Batching"></a>Mini-Batching</h2><p>A technique for training on subsets of the dataset instead of all the data at one time. This provides the ability to train a model, even if a computer lacks the memory to store the entire dataset.  </p>
-<h4 id="Combination-with-SGD"><a href="#Combination-with-SGD" class="headerlink" title="Combination with SGD"></a>Combination with SGD</h4><p> Randomly shuffle the data at the start of each epoch, then create the mini-batches. For each mini-batch, you train the network weights with gradient descent. Since these batches are random, you’re performing SGD with each batch.  </p>
-<h2 id="Epochs"><a href="#Epochs" class="headerlink" title="Epochs"></a>Epochs</h2><p>An epoch is a single forward and backward pass of the whole dataset. This is used to increase the accuracy of the model without requiring more data.  </p>
-<h2 id="Example-Classify-the-letters-in-the-MNIST-database"><a href="#Example-Classify-the-letters-in-the-MNIST-database" class="headerlink" title="Example: Classify the letters in the MNIST database"></a>Example: Classify the letters in the MNIST database</h2><pre><code># import the data
-from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets(&quot;.&quot;, one_hot=True, reshape=False)
-
-# define the learning parameters
-import tensorflow as tf
-
-learning_rate = 0.001
-training_epochs = 20
-batch_size = 128  # Decrease batch size if you don&#39;t have enough memory
-display_step = 1
-
-n_input = 784  # MNIST data input (img shape: 28*28)
-n_classes = 10  # MNIST total classes (0-9 digits)
-
-# define the size of the hidden layer
-n_hidden_layer = 256 # layer number of features
-
-# define the weights and biases
-weights = { 
-    &#39;hidden_layer&#39;: tf.Variable(tf.random_normal([n_input, n_hidden_layer])),
-    &#39;out&#39;: tf.Variable(tf.random_normal([n_hidden_layer, n_classes]))
-}
-biases = {
-    &#39;hidden_layer&#39;: tf.Variable(tf.random_normal([n_hidden_layer])),
-    &#39;out&#39;: tf.Variable(tf.random_normal([n_classes]))
-}
-
-# define the inputs and outputs
-x = tf.placeholder(&quot;float&quot;, [None, 28, 28, 1])
-y = tf.placeholder(&quot;float&quot;, [None, n_classes])
-x_flat = tf.reshape(x, [-1, n_input])
-
-# define the neural network
-# Hidden layer with RELU activation
-layer_1 = tf.add(tf.matmul(x_flat, weights[&#39;hidden_layer&#39;]), biases[&#39;hidden_layer&#39;])
-layer_1 = tf.nn.relu(layer_1)
-# Output layer with linear activation
-logits = tf.add(tf.matmul(layer_1, weights[&#39;out&#39;]), biases[&#39;out&#39;])
-
-# Define loss and optimizer
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=y))
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(cost)
-
-# Initializing the variables
-init = tf.global_variables_initializer()
-
-# Launch the graph
-with tf.Session() as sess:
-    sess.run(init)
-    # Training cycle
-    for epoch in range(training_epochs):
-        total_batch = int(mnist.train.num_examples/batch_size)
-        # Loop over all batches
-        for i in range(total_batch):
-            batch_x, batch_y = mnist.train.next_batch(batch_size)
-            # Run optimization op (backprop) and cost op (to get loss value)
-            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y})
-</code></pre><p>Note: The code <code>minst.train.next_batch()</code> returns a subset of the training data.</p>
-<h2 id="Save-and-restore-the-TensorFlow-Models"><a href="#Save-and-restore-the-TensorFlow-Models" class="headerlink" title="Save and restore the TensorFlow Models"></a>Save and restore the TensorFlow Models</h2><h4 id="Save-Variables"><a href="#Save-Variables" class="headerlink" title="Save Variables"></a>Save Variables</h4><pre><code>import tensorflow as tf
-
-# The file path to save the data
-save_file = &#39;./model.ckpt&#39;
-
-# Two Tensor Variables: weights and bias
-weights = tf.Variable(tf.truncated_normal([2, 3]))
-bias = tf.Variable(tf.truncated_normal([3]))
-
-# Class used to save and/or restore Tensor Variables
-saver = tf.train.Saver()
-
-with tf.Session() as sess:
-    # Initialize all the Variables
-    sess.run(tf.global_variables_initializer())
-
-    # Show the values of weights and bias
-    print(&#39;Weights:&#39;)
-    print(sess.run(weights))
-    print(&#39;Bias:&#39;)
-    print(sess.run(bias))
-
-    # Save the model
-    saver.save(sess, save_file)
-</code></pre><h4 id="Load-Variables"><a href="#Load-Variables" class="headerlink" title="Load Variables"></a>Load Variables</h4><pre><code># Remove the previous weights and bias
-tf.reset_default_graph()
-
-# Two Variables: weights and bias
-weights = tf.Variable(tf.truncated_normal([2, 3]))
-bias = tf.Variable(tf.truncated_normal([3]))
-
-# Class used to save and/or restore Tensor Variables
-saver = tf.train.Saver()
-
-with tf.Session() as sess:
-    # Load the weights and bias
-    saver.restore(sess, save_file)
-
-    # Show the values of weights and bias
-    print(&#39;Weight:&#39;)
-    print(sess.run(weights))
-    print(&#39;Bias:&#39;)
-    print(sess.run(bias))
-</code></pre><h4 id="Save-Model"><a href="#Save-Model" class="headerlink" title="Save Model"></a>Save Model</h4><pre><code># Remove previous Tensors and Operations
-tf.reset_default_graph()
-
-from tensorflow.examples.tutorials.mnist import input_data
-import numpy as np
-
-learning_rate = 0.001
-n_input = 784  # MNIST data input (img shape: 28*28)
-n_classes = 10  # MNIST total classes (0-9 digits)
-
-# Import MNIST data
-mnist = input_data.read_data_sets(&#39;.&#39;, one_hot=True)
-
-# Features and Labels
-features = tf.placeholder(tf.float32, [None, n_input])
-labels = tf.placeholder(tf.float32, [None, n_classes])
-
-# Weights &amp; bias
-weights = tf.Variable(tf.random_normal([n_input, n_classes]))
-bias = tf.Variable(tf.random_normal([n_classes]))
-
-# Logits - xW + b
-logits = tf.add(tf.matmul(features, weights), bias)
-
-# Define loss and optimizer
-cost = tf.reduce_mean(\
-    tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=labels))
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)\
-    .minimize(cost)
-
-# Calculate accuracy
-correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-import math
-
-save_file = &#39;./train_model.ckpt&#39;
-batch_size = 128
-n_epochs = 100
-
-saver = tf.train.Saver()
-
-# Launch the graph
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-
-    # Training cycle
-    for epoch in range(n_epochs):
-        total_batch = math.ceil(mnist.train.num_examples / batch_size)
-
-        # Loop over all batches
-        for i in range(total_batch):
-            batch_features, batch_labels = mnist.train.next_batch(batch_size)
-            sess.run(
-                optimizer,
-                feed_dict={features: batch_features, labels: batch_labels})
-
-        # Print status for every 10 epochs
-        if epoch % 10 == 0:
-            valid_accuracy = sess.run(
-                accuracy,
-                feed_dict={
-                    features: mnist.validation.images,
-                    labels: mnist.validation.labels})
-            print(&#39;Epoch {:&lt;3} - Validation Accuracy: {}&#39;.format(
-                epoch,
-                valid_accuracy))
-
-    # Save the model
-    saver.save(sess, save_file)
-    print(&#39;Trained Model Saved.&#39;)
-</code></pre><h4 id="Load-Model"><a href="#Load-Model" class="headerlink" title="Load Model"></a>Load Model</h4><pre><code>saver = tf.train.Saver()
-
-# Launch the graph
-with tf.Session() as sess:
-    saver.restore(sess, save_file)
-
-    test_accuracy = sess.run(
-        accuracy,
-        feed_dict={features: mnist.test.images, labels: mnist.test.labels})
-
-print(&#39;Test Accuracy: {}&#39;.format(test_accuracy))
-</code></pre><h2 id="Naming-Error"><a href="#Naming-Error" class="headerlink" title="Naming Error"></a>Naming Error</h2><p>Error description:<br>InvalidArgumentError (see above for traceback): Assign requires shapes of both tensors to match.</p>
-<p>Example:<br>    import tensorflow as tf</p>
-<pre><code># Remove the previous weights and bias
-tf.reset_default_graph()
-
-save_file = &#39;model.ckpt&#39;
-
-# Two Tensor Variables: weights and bias
-weights = tf.Variable(tf.truncated_normal([2, 3]))
-bias = tf.Variable(tf.truncated_normal([3]))
-
-saver = tf.train.Saver()
-
-# Print the name of Weights and Bias
-print(&#39;Save Weights: {}&#39;.format(weights.name)) # Save Weights: Variable:0
-print(&#39;Save Bias: {}&#39;.format(bias.name)) # Save Bias: Variable_1:0
-
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    saver.save(sess, save_file)
-
-# Remove the previous weights and bias
-tf.reset_default_graph()
-
-# Two Variables: weights and bias
-bias = tf.Variable(tf.truncated_normal([3])) # Load Weights: Variable_1:0
-weights = tf.Variable(tf.truncated_normal([2, 3])) # Load Bias: Variable:0
-
-saver = tf.train.Saver()
-
-# Print the name of Weights and Bias
-print(&#39;Load Weights: {}&#39;.format(weights.name))
-print(&#39;Load Bias: {}&#39;.format(bias.name))
-
-with tf.Session() as sess:
-    # Load the weights and bias - ERROR
-    saver.restore(sess, save_file)
-</code></pre><p>Reason: TensorFlow use a string identifier “name” for Tensors and Operations. If it is not given, TensorFlow will create one automatically.<br>You can define the “name” manually:<br>    import tensorflow as tf</p>
-<pre><code>tf.reset_default_graph()
-
-save_file = &#39;model.ckpt&#39;
-
-# Two Tensor Variables: weights and bias
-weights = tf.Variable(tf.truncated_normal([2, 3]), name=&#39;weights_0&#39;)
-bias = tf.Variable(tf.truncated_normal([3]), name=&#39;bias_0&#39;)
-
-saver = tf.train.Saver()
-
-# Print the name of Weights and Bias
-print(&#39;Save Weights: {}&#39;.format(weights.name))
-print(&#39;Save Bias: {}&#39;.format(bias.name))
-
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    saver.save(sess, save_file)
-
-# Remove the previous weights and bias
-tf.reset_default_graph()
-
-# Two Variables: weights and bias
-bias = tf.Variable(tf.truncated_normal([3]), name=&#39;bias_0&#39;)
-weights = tf.Variable(tf.truncated_normal([2, 3]) ,name=&#39;weights_0&#39;)
-
-saver = tf.train.Saver()
-
-# Print the name of Weights and Bias
-print(&#39;Load Weights: {}&#39;.format(weights.name))
-print(&#39;Load Bias: {}&#39;.format(bias.name))
-
-with tf.Session() as sess:
-    # Load the weights and bias - No Error
-    saver.restore(sess, save_file)
-
-print(&#39;Loaded Weights and Bias successfully.&#39;)
-</code></pre><h2 id="L2-Regularization"><a href="#L2-Regularization" class="headerlink" title="L2 Regularization"></a>L2 Regularization</h2><p><script type="math/tex">\ell_2</script> regularization add the $\ell_2$ norm of the weight multiplied with a little value to punish too large weights, as the equation \ref{L2} shows.</p>
-<p>\begin{equation}<br>l’ = l + \frac{1}{2}\beta\lVert w \rVert^2_2<br>\label{L2}<br>\end{equation}</p>
-<p>Where $l’$ is the new loss, $l$ is the old loss and $w$ is the weight.  </p>
-<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>The Dropout unit can be inserted in the network structure, it works like a layer. The layer takes in the input of the former layer, randomly sets some of them as zero and enlarges the other correspondingly. For example if the half of the input values are set as zero, the others will be scaled by a factor $2$. It makes the model “not so concentrate” on a specific feature and become more universal.<br>When evaluating the model, the dropout rate should be set as $1$, which means no dropout will appear. It is because the Dropout layer only works on the training process.<br>See <a href="https://www.tensorflow.org/api_docs/python/tf/nn/dropout" target="_blank" rel="noopener">here</a>.  </p>
-<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><p><code>tf.nn.dropout()</code>  </p>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><pre><code>keep_prob = tf.placeholder(tf.float32) # probability to keep units
-
-hidden_layer = tf.add(tf.matmul(features, weights[0]), biases[0])
-hidden_layer = tf.nn.relu(hidden_layer)
-hidden_layer = tf.nn.dropout(hidden_layer, keep_prob)
-
-logits = tf.add(tf.matmul(hidden_layer, weights[1]), biases[1])
-</code></pre><p>Where:  </p>
-<ol>
-<li>hidden_layer: the tensor to which you would like to apply dropout.  </li>
-<li>keep_prob: the probability of keeping (i.e. not dropping) any given unit. (recommend 0.5)  </li>
-</ol>
-<h2 id="Pooling-Max-pooling-method"><a href="#Pooling-Max-pooling-method" class="headerlink" title="Pooling/Max-pooling method"></a>Pooling/Max-pooling method</h2><p>The pooling method is a sample-based discretization process which is well-known as a method for resolving over-fitting problems by abstracting the information from the input and reduce the calculation cost by reducing the number of the parameters for learning, as the Figure shows:</p>
-<p><img width="40%" src="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_1_pooling.png"></p>
-<p>The pooling unit has an user defined size and will slide on the input data with an user defined step size (stride). Each time the unit moves, it will concentrate the information it takes in, for example, the max-pooling method will output the maximum value of the input. The Figure shows the basic idea of a max-pooling method with size $2 \times 2$ and stride $2$:</p>
-<p><img width="40%" src="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_2_maxpooling.png"></p>
-
-          
+          <h2 id="Logistic-Classifier"><a href="#Logistic-Classifier" class="headerlink" title="Logistic Classifier"></a>Logistic Classifier</h2><p>A linear classifier, it takes in the inputs and applies the linear function to them to generate the predictions (classifications).<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/11/Udacity-Self-Driving-Car-Neural-Networks-3-Deep-Neural-Networks/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -720,61 +542,14 @@ logits = tf.add(tf.matmul(hidden_layer, weights[1]), biases[1])
 
       
         
-          
-            <h2 id="“Hello-World”-Code"><a href="#“Hello-World”-Code" class="headerlink" title="“Hello, World” Code"></a>“Hello, World” Code</h2><pre><code>import tensorflow as tf
-# Create a tensorflow constant variable
-hello_constant = tf.constant(&#39;Hello World!&#39;)
-
-with tf.Session() as sess:
-# Run the tensorflow constant in the session
-output = sess.run(hello_constant)
-print(output)
-</code></pre><h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><p>The data in TensorFlow is not stored as integers, floats, doubles …… or strings. These values are encapsulated in the object called “tensor”. The tensor used here is a constant tensor, a tensor comes in a variety of size:  </p>
-<pre><code># 0-dimensional int32 tensor
-A = tf.constant(153)
-# 1-dimensional int32 tensor
-B = tf.constant([12,51,654])
-# 2-dimensional int32 tensor
-C = tf.constant([[21,32,1], [32,343,55]])
-</code></pre><p>A TensorFlow Session is an environment for running a graph. The session is in charge of allocating the operations to GPU(s) and/or CPU(s), including remote machines. the <code>tf.Session()</code> creates a session instance and the <code>tf.Session().run()</code> function evaluates the tensor and returns the results.</p>
-<h2 id="Non-constant-variables"><a href="#Non-constant-variables" class="headerlink" title="Non-constant variables"></a>Non-constant variables</h2><h4 id="TensorFlow-Placeholder"><a href="#TensorFlow-Placeholder" class="headerlink" title="TensorFlow Placeholder"></a>TensorFlow Placeholder</h4><p>A <code>tf.placeholder()</code> returns a tensor that gets its value from data passed to the <code>te.Session().run()</code> which allows you to set the input right before the session runs.  </p>
-<h4 id="Session’s-feed-dict"><a href="#Session’s-feed-dict" class="headerlink" title="Session’s feed_dict"></a>Session’s feed_dict</h4><p>The parameter <code>feed_dict</code> in <code>tf:Session().run()</code> feed the values into the Placeholder, for example:  </p>
-<pre><code>    x = tf.placeholder(tf.string)
-    with tf.Session() as sess:
-        output = sess.run(x, feed_dict={x: &#39;Hello World!&#39;})
-</code></pre><p>Note: the data passed to the feed_dict should match the tensor’s type.  </p>
-<h2 id="TensorFlow-Math"><a href="#TensorFlow-Math" class="headerlink" title="TensorFlow Math"></a>TensorFlow Math</h2><h4 id="Addition-subtraction-multiplication-and-division-in-TensorFlow"><a href="#Addition-subtraction-multiplication-and-division-in-TensorFlow" class="headerlink" title="Addition, subtraction, multiplication and division in TensorFlow"></a>Addition, subtraction, multiplication and division in TensorFlow</h4><pre><code>x = tf.constant(9)
-y = tf.constant(3)
-
-# Addition
-z = tf.add(x, y)
-
-# Subtraction
-k = tf.subtract(x, y)
-
-# multiplication
-l = tf.multiply(x, y)
-
-# division
-m = tf.divide(x, y)
-</code></pre><h4 id="Matrices-multiplication"><a href="#Matrices-multiplication" class="headerlink" title="Matrices multiplication"></a>Matrices multiplication</h4><pre><code>tf.matmul(a, b)
-</code></pre><h4 id="Variable-type-Converting-in-TensorFlow"><a href="#Variable-type-Converting-in-TensorFlow" class="headerlink" title="Variable type Converting in TensorFlow"></a>Variable type Converting in TensorFlow</h4><pre><code>tf.cast(tf.const(9.99), tf.int32)
-</code></pre><h4 id="TensorFlow-Linear-function"><a href="#TensorFlow-Linear-function" class="headerlink" title="TensorFlow Linear function"></a>TensorFlow Linear function</h4><p>The linear function <script type="math/tex">y = Wx + b</script> in TensorFlow should be : <script type="math/tex">y = xW + b</script>, where the variables <script type="math/tex">W</script> and <script type="math/tex">b</script> should not be <code>tf.placeholder()</code> or <code>tf.constant()</code>, because these two type can not be modified.</p>
-<h6 id="tf-Variable"><a href="#tf-Variable" class="headerlink" title="tf.Variable()"></a><code>tf.Variable()</code></h6><p>It creates a tensor with an initial value that can be modified. The tensor stores its state in the session, and the state of the tensor must be initialized manually.  </p>
-<pre><code>init = tf.global_variables_initializer()
-with tf.Session() as sess:
-    sess.run(init)
-</code></pre><h4 id="tf-truncated-normal"><a href="#tf-truncated-normal" class="headerlink" title="tf.truncated_normal()"></a><code>tf.truncated_normal()</code></h4><p>It returns a tensor with random values from a normal distribution whose magnitude is no more than 2 standard deviations from the mean.</p>
-<pre><code>n_features = 100
-n_labels = 10
-weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
-</code></pre><h4 id="tf-zeros"><a href="#tf-zeros" class="headerlink" title="tf.zeros()"></a><code>tf.zeros()</code></h4><p>It returns a tensor with all zeros.  </p>
-<pre><code>bias = tf.Variable(tf.zeros(n_labels))
-</code></pre><h4 id="TensorFlow-Nonlinear-functions"><a href="#TensorFlow-Nonlinear-functions" class="headerlink" title="TensorFlow Nonlinear functions"></a>TensorFlow Nonlinear functions</h4><ul>
-<li>ReLU: <code>tensorflow.nn.relu()</code></li>
-</ul>
-
-          
+          <h2 id="“Hello-World”-Code"><a href="#“Hello-World”-Code" class="headerlink" title="“Hello, World” Code"></a>“Hello, World” Code</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/09/Udacity-Self-driving-Car-Neural-Networks-2-Introduction-to-TensorFlow/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -891,63 +666,17 @@ weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
 
       
         
-          
-            <h2 id="Main-idea"><a href="#Main-idea" class="headerlink" title="Main idea"></a>Main idea</h2><p>Take in an input, process the information (for example: $z = w * x + b$), give an output(for example using activation functions).  </p>
-<h2 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h2><p>An artificial neurons, the basic unit of a neural network, each takes in an input data and decides how to react to(categorize) that data.  </p>
-<h2 id="Weights-and-bias"><a href="#Weights-and-bias" class="headerlink" title="Weights and bias"></a>Weights and bias</h2><ul>
-<li>The input of the perceptron will be multiplied by a weight value, this weight will be tuned later for a better result w.r.t. the output evaluation.  </li>
-<li>Higher weight means the network considers that input is more important.  </li>
-<li>The bias is a value which will be added to the multiplied result, also tunable.  </li>
-</ul>
-<h2 id="Activation-functions"><a href="#Activation-functions" class="headerlink" title="Activation functions"></a>Activation functions</h2><p>Activation functions are functions which decide the output of the node.<br>The most common activation functions are: Sigmoid , ReLu , Tanh  and softmax, where the first three activation functions follow the formulas below and the softmax function (see below) is used for the multi-class classifications and output the possibility of this result.<br>Sigmoid: $f(z) = \frac{1}{1 + e^{-z}}$<br>ReLU:    $f(z) = \max(0, z)$<br>tanh:    $f(z) = \tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}$  </p>
-<h2 id="Softmax-function"><a href="#Softmax-function" class="headerlink" title="Softmax function"></a>Softmax function</h2><p>The softmax function is also called normalized exponential function, it is used for transforming the from the model calculated value into the probability distribution of the different classes.<br>For example, a model needs to predict the color of the input and there are three options: red, green and blue. The output value from the model of this three options are: $2$, $9$ and $0$, now the model needs to transform the value into the probability for the further prediction, the corresponding distribution of the probability has the following rules:  </p>
-<ol>
-<li>The probability needs to be positive.  </li>
-<li>The summary of the probability should be equal to $1$.  </li>
-<li>The class with higher value has the higher probability.  </li>
-</ol>
-<p>To achieve this, the transformation can be realized by the equation:  </p>
-<script type="math/tex; mode=display">P(A_i) = \frac{e^{Z_i}}{\sum^{n}_{j=1} e^{Z_j}}</script><p>Where $P(A_i)$ is the probability for classifying this input to the Class $A_i$, $Z_i$ is the output value from the model of the $i$th class, $n$ is the number of the classes.<br>For the prediction, the model classifies the input to the class with the maximum probability.</p>
-<h2 id="Perception-Algorithm"><a href="#Perception-Algorithm" class="headerlink" title="Perception Algorithm"></a>Perception Algorithm</h2><h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Find a line <script type="math/tex">w * x + b * y + c = 0</script> that separates the samples.</p>
-<h4 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h4><ul>
-<li>Start with random weights and bias: a, b, c.  </li>
-<li>For every misclassified points:  <ul>
-<li>If the point is under the line: <script type="math/tex">a += \alpha * x_i%, $b += \alpha * y_i$, $c += \alpha</script>.  </li>
-<li>If the point is above the line: <script type="math/tex">a -= \alpha * x_i%, $b -= \alpha * y_i$, $c -= \alpha</script>.  </li>
-</ul>
-</li>
-</ul>
-<p>Note: The $\alpha$ here should be defined by the user.  </p>
-<h2 id="Error-Functions"><a href="#Error-Functions" class="headerlink" title="Error Functions"></a>Error Functions</h2><h4 id="Conditions-to-be-met"><a href="#Conditions-to-be-met" class="headerlink" title="Conditions to be met"></a>Conditions to be met</h4><ol>
-<li>differentiable.  </li>
-<li>continuous. </li>
-</ol>
-<h2 id="Cross-Entropy"><a href="#Cross-Entropy" class="headerlink" title="Cross Entropy"></a>Cross Entropy</h2><h4 id="Function"><a href="#Function" class="headerlink" title="Function:"></a>Function:</h4><script type="math/tex; mode=display">\sum^{n}_{j=1} -ln(P_j)</script><p>Note: Smaller cross entropy means higher probability.  </p>
-<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><h4 id="Mainly-steps"><a href="#Mainly-steps" class="headerlink" title="Mainly steps:"></a>Mainly steps:</h4><ol>
-<li>Take the data.  </li>
-<li>Pick a random model.  </li>
-<li>Calculate the error. </li>
-<li>Minimize the error, and obtain a better model.  </li>
-</ol>
-<h2 id="Gradient-Descent-Algorithm"><a href="#Gradient-Descent-Algorithm" class="headerlink" title="Gradient Descent Algorithm"></a>Gradient Descent Algorithm</h2><h4 id="Main-idea-1"><a href="#Main-idea-1" class="headerlink" title="Main idea:"></a>Main idea:</h4><p>Take the negative of the gradient of the error function as the moving direction, use the learning rate to avoid dramatic changes.</p>
-<script type="math/tex; mode=display">w_{i}' -= \alpha * \frac{\partial E}{\partial w_i}</script><p>Where $w_i$ means the i-th weight, and $E$ means the error.  </p>
-<h2 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h2><h4 id="Main-idea-2"><a href="#Main-idea-2" class="headerlink" title="Main idea"></a>Main idea</h4><p>The linear combination of the output from the last models (cells).  </p>
-<h4 id="Feedforward"><a href="#Feedforward" class="headerlink" title="Feedforward"></a>Feedforward</h4><p>Take input, get the output of each layers.</p>
-<h4 id="Mathematical-Knowledges"><a href="#Mathematical-Knowledges" class="headerlink" title="Mathematical Knowledges:"></a>Mathematical Knowledges:</h4><p><a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces/vectors/v/vector-introduction-linear-algebra" target="_blank" rel="noopener">Introduction to vectors</a><br><a href="https://www.khanacademy.org/math/precalculus/precalc-matrices" target="_blank" rel="noopener">Introduction to matrices</a><br><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction" target="_blank" rel="noopener">Chain rules</a>  </p>
-<h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><h4 id="Main-idea-3"><a href="#Main-idea-3" class="headerlink" title="Main idea"></a>Main idea</h4><p>Update the parameters in each layers with regard to the error function.<br>Gradient of the error function:</p>
-<script type="math/tex; mode=display">\nabla E = (\frac{\partial E}{\partial w_{11}}, ... , \frac{\partial E}{\partial w_{mn}}, \frac{\partial E}{\partial b_1}, ... , \frac{\partial E}{\partial b_m})</script><h4 id="Main-steps"><a href="#Main-steps" class="headerlink" title="Main steps"></a>Main steps</h4><ol>
-<li>Doing a feedforward operation.  </li>
-<li>Comparing the output of the model with the desired output and calculating the error.  </li>
-<li>Running the feedforward operation backwards (backpropagation) to spread the error to each of the weights.  </li>
-<li>Use this to update the weights, and get a better model.  </li>
-<li>Continue this until we have a model that is good.  </li>
-</ol>
-<h2 id="Further-Reading"><a href="#Further-Reading" class="headerlink" title="Further Reading"></a>Further Reading</h2><p><a href="https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b#.vt3ax2kg9" target="_blank" rel="noopener">Yes, you should understand backprop</a><br><a href="https://www.youtube.com/watch?v=59Hbtz7XgjM" target="_blank" rel="noopener">a lecture from Stanford’s CS231n course</a>  </p>
-
-          
+          <h2 id="Main-idea"><a href="#Main-idea" class="headerlink" title="Main idea"></a>Main idea</h2><p>Take in an input, process the information (for example: $z = w * x + b$), give an output(for example using activation functions).<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/08/Udacity-Self-driving-Car-Neural-Networks-1-Fundamentals/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -1024,7 +753,7 @@ weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
