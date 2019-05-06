@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning, Deep Learning, Self Driving, Linux">
+  <meta name="keywords" content="德语单词,">
 
 
 
@@ -80,17 +80,18 @@
 
 
 
-<meta name="description" content="“Hello, World” Code">
+<meta name="description" content="日常听力的词汇积累">
+<meta name="keywords" content="德语单词">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Udacity Self-driving Car - Neural Networks: 2. Introduction to TensorFlow">
-<meta property="og:url" content="https://dongzhenhuangfu.github.io/2019/04/09/Udacity-Self-driving-Car-Neural-Networks-2-Introduction-to-TensorFlow/index.html">
+<meta property="og:title" content="德语学习：词汇 KW19, 2019">
+<meta property="og:url" content="https://dongzhenhuangfu.github.io/2019/05/03/德语学习：词汇_kw19/index.html">
 <meta property="og:site_name" content="皇甫二小">
-<meta property="og:description" content="“Hello, World” Code">
+<meta property="og:description" content="日常听力的词汇积累">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-13T14:40:40.757Z">
+<meta property="og:updated_time" content="2019-05-06T17:05:29.292Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Udacity Self-driving Car - Neural Networks: 2. Introduction to TensorFlow">
-<meta name="twitter:description" content="“Hello, World” Code">
+<meta name="twitter:title" content="德语学习：词汇 KW19, 2019">
+<meta name="twitter:description" content="日常听力的词汇积累">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://dongzhenhuangfu.github.io/2019/04/09/Udacity-Self-driving-Car-Neural-Networks-2-Introduction-to-TensorFlow/">
+  <link rel="canonical" href="https://dongzhenhuangfu.github.io/2019/05/03/德语学习：词汇_kw19/">
 
 
 
 
 
-  <title>Udacity Self-driving Car - Neural Networks: 2. Introduction to TensorFlow | 皇甫二小</title>
+  <title>德语学习：词汇 KW19, 2019 | 皇甫二小</title>
   
 
 
@@ -233,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dongzhenhuangfu.github.io/2019/04/09/Udacity-Self-driving-Car-Neural-Networks-2-Introduction-to-TensorFlow/">
+    <link itemprop="mainEntityOfPage" href="https://dongzhenhuangfu.github.io/2019/05/03/德语学习：词汇_kw19/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wyatt Huangfu">
@@ -250,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Udacity Self-driving Car - Neural Networks: 2. Introduction to TensorFlow</h1>
+          <h1 class="post-title" itemprop="name headline">德语学习：词汇 KW19, 2019</h1>
         
 
         <div class="post-meta">
@@ -262,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T10:46:18+02:00">
-                2019-04-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-03T21:02:57+02:00">
+                2019-05-03
               </time>
             
 
@@ -272,6 +273,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/德语学习/" itemprop="url" rel="index">
+                    <span itemprop="name">德语学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -300,60 +323,8 @@
       
 
       
-        <h1 id="“Hello-World”-Code"><a href="#“Hello-World”-Code" class="headerlink" title="“Hello, World” Code"></a>“Hello, World” Code</h1><a id="more"></a>
-<pre><code>import tensorflow as tf
-# Create a tensorflow constant variable
-hello_constant = tf.constant(&#39;Hello World!&#39;)
-
-with tf.Session() as sess:
-# Run the tensorflow constant in the session
-output = sess.run(hello_constant)
-print(output)
-</code></pre><h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>The data in TensorFlow is not stored as integers, floats, doubles …… or strings. These values are encapsulated in the object called “tensor”. The tensor used here is a constant tensor, a tensor comes in a variety of size:  </p>
-<pre><code># 0-dimensional int32 tensor
-A = tf.constant(153)
-# 1-dimensional int32 tensor
-B = tf.constant([12,51,654])
-# 2-dimensional int32 tensor
-C = tf.constant([[21,32,1], [32,343,55]])
-</code></pre><p>A TensorFlow Session is an environment for running a graph. The session is in charge of allocating the operations to GPU(s) and/or CPU(s), including remote machines. the <code>tf.Session()</code> creates a session instance and the <code>tf.Session().run()</code> function evaluates the tensor and returns the results.</p>
-<h1 id="Non-constant-variables"><a href="#Non-constant-variables" class="headerlink" title="Non-constant variables"></a>Non-constant variables</h1><h2 id="TensorFlow-Placeholder"><a href="#TensorFlow-Placeholder" class="headerlink" title="TensorFlow Placeholder"></a>TensorFlow Placeholder</h2><p>A <code>tf.placeholder()</code> returns a tensor that gets its value from data passed to the <code>te.Session().run()</code> which allows you to set the input right before the session runs.  </p>
-<h2 id="Session’s-feed-dict"><a href="#Session’s-feed-dict" class="headerlink" title="Session’s feed_dict"></a>Session’s feed_dict</h2><p>The parameter <code>feed_dict</code> in <code>tf:Session().run()</code> feed the values into the Placeholder, for example:  </p>
-<pre><code>    x = tf.placeholder(tf.string)
-    with tf.Session() as sess:
-        output = sess.run(x, feed_dict={x: &#39;Hello World!&#39;})
-</code></pre><p>Note: the data passed to the feed_dict should match the tensor’s type.  </p>
-<h1 id="TensorFlow-Math"><a href="#TensorFlow-Math" class="headerlink" title="TensorFlow Math"></a>TensorFlow Math</h1><h2 id="Addition-subtraction-multiplication-and-division-in-TensorFlow"><a href="#Addition-subtraction-multiplication-and-division-in-TensorFlow" class="headerlink" title="Addition, subtraction, multiplication and division in TensorFlow"></a>Addition, subtraction, multiplication and division in TensorFlow</h2><pre><code>x = tf.constant(9)
-y = tf.constant(3)
-
-# Addition
-z = tf.add(x, y)
-
-# Subtraction
-k = tf.subtract(x, y)
-
-# multiplication
-l = tf.multiply(x, y)
-
-# division
-m = tf.divide(x, y)
-</code></pre><h2 id="Matrices-multiplication"><a href="#Matrices-multiplication" class="headerlink" title="Matrices multiplication"></a>Matrices multiplication</h2><pre><code>tf.matmul(a, b)
-</code></pre><h2 id="Variable-type-Converting-in-TensorFlow"><a href="#Variable-type-Converting-in-TensorFlow" class="headerlink" title="Variable type Converting in TensorFlow"></a>Variable type Converting in TensorFlow</h2><pre><code>tf.cast(tf.const(9.99), tf.int32)
-</code></pre><h2 id="TensorFlow-Linear-function"><a href="#TensorFlow-Linear-function" class="headerlink" title="TensorFlow Linear function"></a>TensorFlow Linear function</h2><p>The linear function <script type="math/tex">y = Wx + b</script> in TensorFlow should be : <script type="math/tex">y = xW + b</script>, where the variables <script type="math/tex">W</script> and <script type="math/tex">b</script> should not be <code>tf.placeholder()</code> or <code>tf.constant()</code>, because these two type can not be modified.</p>
-<h3 id="tf-Variable"><a href="#tf-Variable" class="headerlink" title="tf.Variable()"></a><code>tf.Variable()</code></h3><p>It creates a tensor with an initial value that can be modified. The tensor stores its state in the session, and the state of the tensor must be initialized manually.  </p>
-<pre><code>init = tf.global_variables_initializer()
-with tf.Session() as sess:
-    sess.run(init)
-</code></pre><h2 id="tf-truncated-normal"><a href="#tf-truncated-normal" class="headerlink" title="tf.truncated_normal()"></a><code>tf.truncated_normal()</code></h2><p>It returns a tensor with random values from a normal distribution whose magnitude is no more than 2 standard deviations from the mean.</p>
-<pre><code>n_features = 100
-n_labels = 10
-weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
-</code></pre><h2 id="tf-zeros"><a href="#tf-zeros" class="headerlink" title="tf.zeros()"></a><code>tf.zeros()</code></h2><p>It returns a tensor with all zeros.  </p>
-<pre><code>bias = tf.Variable(tf.zeros(n_labels))
-</code></pre><h2 id="TensorFlow-Nonlinear-functions"><a href="#TensorFlow-Nonlinear-functions" class="headerlink" title="TensorFlow Nonlinear functions"></a>TensorFlow Nonlinear functions</h2><ul>
-<li>ReLU: <code>tensorflow.nn.relu()</code></li>
-</ul>
-
+        <p>日常听力的词汇积累<br><a id="more"></a></p>
+<h1 id="May-06-2019"><a href="#May-06-2019" class="headerlink" title="May 06, 2019"></a>May 06, 2019</h1>
       
     </div>
     
@@ -368,6 +339,12 @@ weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/德语单词/" rel="tag"># 德语单词</a>
+          
+        </div>
+      
 
       
       
@@ -377,8 +354,8 @@ weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/08/Udacity-Self-driving-Car-Neural-Networks-1-Fundamentals/" rel="next" title="Udacity Self-driving Car - Neural Networks: 1. Fundamentals">
-                <i class="fa fa-chevron-left"></i> Udacity Self-driving Car - Neural Networks: 1. Fundamentals
+              <a href="/2019/05/03/德语学习：词汇_kw18/" rel="next" title="德语学习：词汇 KW18, 2019">
+                <i class="fa fa-chevron-left"></i> 德语学习：词汇 KW18, 2019
               </a>
             
           </div>
@@ -386,10 +363,6 @@ weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/11/Udacity-Self-Driving-Car-Neural-Networks-3-Deep-Neural-Networks/" rel="prev" title="Udacity Self-Driving Car - Neural Networks: 3. Deep Neural Networks">
-                Udacity Self-Driving Car - Neural Networks: 3. Deep Neural Networks <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -521,7 +494,7 @@ weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#“Hello-World”-Code"><span class="nav-number">1.</span> <span class="nav-text">“Hello, World” Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Note"><span class="nav-number">1.1.</span> <span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Non-constant-variables"><span class="nav-number">2.</span> <span class="nav-text">Non-constant variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow-Placeholder"><span class="nav-number">2.1.</span> <span class="nav-text">TensorFlow Placeholder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session’s-feed-dict"><span class="nav-number">2.2.</span> <span class="nav-text">Session’s feed_dict</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow-Math"><span class="nav-number">3.</span> <span class="nav-text">TensorFlow Math</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Addition-subtraction-multiplication-and-division-in-TensorFlow"><span class="nav-number">3.1.</span> <span class="nav-text">Addition, subtraction, multiplication and division in TensorFlow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrices-multiplication"><span class="nav-number">3.2.</span> <span class="nav-text">Matrices multiplication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable-type-Converting-in-TensorFlow"><span class="nav-number">3.3.</span> <span class="nav-text">Variable type Converting in TensorFlow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow-Linear-function"><span class="nav-number">3.4.</span> <span class="nav-text">TensorFlow Linear function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tf-Variable"><span class="nav-number">3.4.1.</span> <span class="nav-text">tf.Variable()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-truncated-normal"><span class="nav-number">3.5.</span> <span class="nav-text">tf.truncated_normal()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-zeros"><span class="nav-number">3.6.</span> <span class="nav-text">tf.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow-Nonlinear-functions"><span class="nav-number">3.7.</span> <span class="nav-text">TensorFlow Nonlinear functions</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#May-06-2019"><span class="nav-number">1.</span> <span class="nav-text">May 06, 2019</span></a></li></ol></div>
             
 
           </div>
