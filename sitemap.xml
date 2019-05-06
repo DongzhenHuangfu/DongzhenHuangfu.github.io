@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dongzhenhuangfu.github.io/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-6-Transfer-Learning/</loc>
+    
+    <lastmod>2019-05-06T20:03:56.583Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dongzhenhuangfu.github.io/2019/04/08/Udacity-Self-driving-Car-Neural-Networks-1-Fundamentals/</loc>
     
     <lastmod>2019-05-06T19:59:27.512Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://dongzhenhuangfu.github.io/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-5-Keras/</loc>
     
     <lastmod>2019-05-06T19:59:00.480Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dongzhenhuangfu.github.io/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-6-Transfer-Learning/</loc>
-    
-    <lastmod>2019-05-06T19:58:53.495Z</lastmod>
     
   </url>
   
