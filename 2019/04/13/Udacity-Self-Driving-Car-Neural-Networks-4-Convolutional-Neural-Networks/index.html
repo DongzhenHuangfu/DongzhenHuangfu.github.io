@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="4M-UOrPu323SANQYcVzRIPTfbOQedWO4qupfwk-M2s0">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep learning,Machine learning,Neural networks,Self driving,Convolutional neural networks,TensorFlow,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Main ideaA neural networks that share their parameters across space. Aims to pick the properties regardless of the position.">
+<meta name="keywords" content="Deep learning,Machine learning,Neural networks,Self driving,Convolutional neural networks,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Udacity Self-Driving Car - Neural Networks: 4. Convolutional Neural Networks">
+<meta property="og:url" content="https://dongzhenhuangfu.github.io/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-4-Convolutional-Neural-Networks/index.html">
+<meta property="og:site_name" content="皇甫二小">
+<meta property="og:description" content="Main ideaA neural networks that share their parameters across space. Aims to pick the properties regardless of the position.">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_1_pooling.png">
+<meta property="og:image" content="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_2_maxpooling.png">
+<meta property="og:image" content="https://i.ytimg.com/vi/VxhSouuSZDY/maxresdefault.jpg">
+<meta property="og:image" content="https://www.researchgate.net/profile/Yiren_Zhou/publication/312170477/figure/fig1/AS:448817725218816@1484017892071/Structure-of-LeNet-5.png">
+<meta property="og:updated_time" content="2020-02-02T02:23:44.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Udacity Self-Driving Car - Neural Networks: 4. Convolutional Neural Networks">
+<meta name="twitter:description" content="Main ideaA neural networks that share their parameters across space. Aims to pick the properties regardless of the position.">
+<meta name="twitter:image" content="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_1_pooling.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dongzhenhuangfu.github.io/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-4-Convolutional-Neural-Networks/">
+
+
+
+
+
+  <title>Udacity Self-Driving Car - Neural Networks: 4. Convolutional Neural Networks | 皇甫二小</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">皇甫二小</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">带着赤子的骄傲</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dongzhenhuangfu.github.io/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-4-Convolutional-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wyatt Huangfu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="皇甫二小">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Udacity Self-Driving Car - Neural Networks: 4. Convolutional Neural Networks</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-13T10:53:09+02:00">
+                2019-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Udacity-Nanodegree-Self-Driving-Car/" itemprop="url" rel="index">
+                    <span itemprop="name">Udacity Nanodegree Self-Driving Car</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Main-idea"><a href="#Main-idea" class="headerlink" title="Main idea"></a>Main idea</h1><p>A neural networks that share their parameters across space. Aims to pick the properties regardless of the position.<br><a id="more"></a></p>
+<h1 id="Padding"><a href="#Padding" class="headerlink" title="Padding"></a>Padding</h1><h2 id="Calculate-the-size-of-the-output"><a href="#Calculate-the-size-of-the-output" class="headerlink" title="Calculate the size of the output"></a>Calculate the size of the output</h2><p>Given:  </p>
+<ul>
+<li>Input layer has a width of W and a height of H  </li>
+<li>Convolutional layer has a filter size F  </li>
+<li>Stride of S  </li>
+<li>Numbers of filters K  </li>
+</ul>
+<p>Width of the next layer: $W<em>{out} = \frac{W - F + 2P}{S} + 1$<br>Height of the next layer: $H</em>{out} = \frac{H - F + 2P}{S} + 1$<br>Depth of the next layer: $D_{out} = K$ </p>
+<h3 id="Valid-padding"><a href="#Valid-padding" class="headerlink" title="Valid padding"></a>Valid padding</h3><p>Don’t go pass the boundary.<br>$out<em>{height} = ceil(\frac{float(in</em>{height} - filter<em>{height} + 1)}{float(strides[1]})$<br>$out</em>{width} = ceil(\frac{float(in<em>{width} - filter</em>{width} + 1)}{float(strides[2])})$</p>
+<h3 id="Same-padding"><a href="#Same-padding" class="headerlink" title="Same padding"></a>Same padding</h3><p>Go off the Edge and pad with zeros in such a way that the output size is exactly the same size as the input map. (in case stride is 1)<br>$out<em>{height} = ceil(\frac{in</em>{height}}{float(strides[1])})$<br>$out<em>{width} = ceil(\frac{in</em>{width}}{float(strides[2])})$  </p>
+<h1 id="Filter-Depth"><a href="#Filter-Depth" class="headerlink" title="Filter Depth"></a>Filter Depth</h1><p>Different filters pick up different qualities and will be connected to the different neurons in the next layer. The depth $k$ means the number of the filters.  </p>
+<h1 id="Visualizing-CNNs"><a href="#Visualizing-CNNs" class="headerlink" title="Visualizing CNNs"></a>Visualizing CNNs</h1><p>See the <a href="https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf" target="_blank" rel="noopener">relevant paper</a> and the <a href="https://www.youtube.com/watch?v=ghEmQSxT6tw" target="_blank" rel="noopener">video</a> from Zeiler and Fergus.  </p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre><code># image_input: the test image being fed into the network to produce the feature maps
+# tf_activation: should be a tf variable name used during your training procedure that represents the calculated state of a specific weight layer
+# Note: that to get access to tf_activation, the session should be interactive which can be achieved with the following commands.
+# sess = tf.InteractiveSession()
+# sess.as_default()
+
+# activation_min/max: can be used to view the activation contrast in more detail, by default matplot sets min and max to the actual min and    max values of the output
+# plt_num: used to plot out multiple different weight feature map sets on the same block, just extend the plt number for each new feature map entry
+
+def outputFeatureMap(image_input, tf_activation, activation_min=-1, activation_max=-1 ,plt_num=1):
+    # Here make sure to preprocess your image_input in a way your network expects
+    # with size, normalization, ect if needed
+    # image_input =
+    # Note: x should be the same name as your network&#39;s tensorflow data placeholder variable
+    # If you get an error tf_activation is not defined it maybe having trouble accessing the variable from inside a function
+    activation = tf_activation.eval(session=sess,feed_dict={x : image_input})
+    featuremaps = activation.shape[3]
+    plt.figure(plt_num, figsize=(15,15))
+    for featuremap in range(featuremaps):
+        plt.subplot(6,8, featuremap+1) # sets the number of feature maps to show on each row and column
+        plt.title(&#39;FeatureMap &#39; + str(featuremap)) # displays the feature map number
+        if activation_min != -1 &amp; activation_max != -1:
+            plt.imshow(activation[0,:,:, featuremap], interpolation=&quot;nearest&quot;, vmin =activation_min, vmax=activation_max, cmap=&quot;gray&quot;)
+        elif activation_max != -1:
+            plt.imshow(activation[0,:,:, featuremap], interpolation=&quot;nearest&quot;, vmax=activation_max, cmap=&quot;gray&quot;)
+        elif activation_min !=-1:
+            plt.imshow(activation[0,:,:, featuremap], interpolation=&quot;nearest&quot;, vmin=activation_min, cmap=&quot;gray&quot;)
+        else:
+            plt.imshow(activation[0,:,:, featuremap], interpolation=&quot;nearest&quot;, cmap=&quot;gray&quot;)
+</code></pre><h1 id="Implement-a-CNN-in-TensorFlow"><a href="#Implement-a-CNN-in-TensorFlow" class="headerlink" title="Implement a CNN in TensorFlow"></a>Implement a CNN in TensorFlow</h1><pre><code># Output depth
+k_output = 64
+
+# Image Properties
+image_width = 10
+image_height = 10
+color_channels = 3
+
+# Convolution filter
+filter_size_width = 5
+filter_size_height = 5
+
+# Input/Image
+input = tf.placeholder(
+    tf.float32,
+    shape=[None, image_height, image_width, color_channels])
+
+# Weight and bias
+weight = tf.Variable(tf.truncated_normal(
+    [filter_size_height, filter_size_width, color_channels, k_output]))
+bias = tf.Variable(tf.zeros(k_output))
+
+# Apply Convolution
+conv_layer = tf.nn.conv2d(input, weight, strides=[1, 2, 2, 1], padding=&#39;SAME&#39;)
+# Add bias
+conv_layer = tf.nn.bias_add(conv_layer, bias)
+# Apply activation function
+conv_layer = tf.nn.relu(conv_layer)
+</code></pre><p>Note: </p>
+<ul>
+<li>“stride” in <code>tf.nn.conv2d</code>: [batch, input_height, input_width, input_channels], the “batch” and “input_channels” here usually be set to be 1.  </li>
+<li><code>tf.nn.bias_add()</code> adds a 1-d bias to the last dimension in a matrix.  </li>
+</ul>
+<h1 id="Pooling-Max-pooling-method"><a href="#Pooling-Max-pooling-method" class="headerlink" title="Pooling/Max-pooling method"></a>Pooling/Max-pooling method</h1><p>The pooling method is a sample-based discretization process which is well-known as a method for resolving over-fitting problems by abstracting the information from the input and reduce the calculation cost by reducing the number of the parameters for learning, as the Figure shows:</p>
+<p><img width="90%" src="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_1_pooling.png"></p>
+<p>The pooling unit has an user defined size and will slide on the input data with an user defined step size (stride). Each time the unit moves, it will concentrate the information it takes in, for example, the max-pooling method will output the maximum value of the input. The Figure shows the basic idea of a max-pooling method with size $2 \times 2$ and stride $2$:</p>
+<p><img width="90%" src="https://github.com/DongzhenHuangfu/pictures-for-blog/raw/master/Udacity_self_driving_car_neural_networks/3_2_maxpooling.png">  </p>
+<h1 id="1-times-1-Convolutions"><a href="#1-times-1-Convolutions" class="headerlink" title="$1 \times 1$ Convolutions"></a>$1 \times 1$ Convolutions</h1><p>Very inexpensive way to make the model deeper and have more parameters.  </p>
+<h1 id="Inception-modules"><a href="#Inception-modules" class="headerlink" title="Inception modules"></a>Inception modules</h1><p>See the video <a href="https://www.youtube.com/watch?v=VxhSouuSZDY" target="_blank" rel="noopener">here</a>.<br><img width="90%" src="https://i.ytimg.com/vi/VxhSouuSZDY/maxresdefault.jpg">  </p>
+<h1 id="LeNet"><a href="#LeNet" class="headerlink" title="LeNet"></a>LeNet</h1><p>See the paper <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf" target="_blank" rel="noopener">here</a>.<br><img width="90%" src="https://www.researchgate.net/profile/Yiren_Zhou/publication/312170477/figure/fig1/AS:448817725218816@1484017892071/Structure-of-LeNet-5.png">  </p>
+<h1 id="Additional-Resources"><a href="#Additional-Resources" class="headerlink" title="Additional Resources"></a>Additional Resources</h1><ul>
+<li>Andrej Karpathy’s <a href="http://cs231n.github.io/" target="_blank" rel="noopener">CS231n Stanford course</a> on Convolutional Neural Networks.  </li>
+<li>Michael Nielsen’s <a href="http://neuralnetworksanddeeplearning.com/" target="_blank" rel="noopener">free book</a> on Deep Learning.  </li>
+<li>Goodfellow, Bengio, and Courville’s more advanced <a href="http://deeplearningbook.org/" target="_blank" rel="noopener">free book</a> on Deep Learning.  </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-learning/" rel="tag"># Deep learning</a>
+          
+            <a href="/tags/Machine-learning/" rel="tag"># Machine learning</a>
+          
+            <a href="/tags/Neural-networks/" rel="tag"># Neural networks</a>
+          
+            <a href="/tags/Self-driving/" rel="tag"># Self driving</a>
+          
+            <a href="/tags/Convolutional-neural-networks/" rel="tag"># Convolutional neural networks</a>
+          
+            <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/11/Udacity-Self-Driving-Car-Neural-Networks-3-Deep-Neural-Networks/" rel="next" title="Udacity Self-Driving Car - Neural Networks: 3. Deep Neural Networks">
+                <i class="fa fa-chevron-left"></i> Udacity Self-Driving Car - Neural Networks: 3. Deep Neural Networks
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/13/Udacity-Self-Driving-Car-Neural-Networks-6-Transfer-Learning/" rel="prev" title="Udacity Self-Driving Car - Neural Networks: 6. Transfer Learning">
+                Udacity Self-Driving Car - Neural Networks: 6. Transfer Learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Wyatt Huangfu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Main-idea"><span class="nav-number">1.</span> <span class="nav-text">Main idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Padding"><span class="nav-number">2.</span> <span class="nav-text">Padding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculate-the-size-of-the-output"><span class="nav-number">2.1.</span> <span class="nav-text">Calculate the size of the output</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Valid-padding"><span class="nav-number">2.1.1.</span> <span class="nav-text">Valid padding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Same-padding"><span class="nav-number">2.1.2.</span> <span class="nav-text">Same padding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter-Depth"><span class="nav-number">3.</span> <span class="nav-text">Filter Depth</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualizing-CNNs"><span class="nav-number">4.</span> <span class="nav-text">Visualizing CNNs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implement-a-CNN-in-TensorFlow"><span class="nav-number">5.</span> <span class="nav-text">Implement a CNN in TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling-Max-pooling-method"><span class="nav-number">6.</span> <span class="nav-text">Pooling/Max-pooling method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-times-1-Convolutions"><span class="nav-number">7.</span> <span class="nav-text">$1 \times 1$ Convolutions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inception-modules"><span class="nav-number">8.</span> <span class="nav-text">Inception modules</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LeNet"><span class="nav-number">9.</span> <span class="nav-text">LeNet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Additional-Resources"><span class="nav-number">10.</span> <span class="nav-text">Additional Resources</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wyatt Huangfu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

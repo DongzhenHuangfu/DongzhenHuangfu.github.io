@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="4M-UOrPu323SANQYcVzRIPTfbOQedWO4qupfwk-M2s0">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep learning,Machine learning,Neural networks,Self driving,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Main ideaTake in an input, process the information (for example: $z = w * x + b$), give an output(for example using activation functions).">
+<meta name="keywords" content="Deep learning,Machine learning,Neural networks,Self driving">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Udacity Self-driving Car - Neural Networks: 1. Fundamentals">
+<meta property="og:url" content="https://dongzhenhuangfu.github.io/2019/04/08/Udacity-Self-driving-Car-Neural-Networks-1-Fundamentals/index.html">
+<meta property="og:site_name" content="皇甫二小">
+<meta property="og:description" content="Main ideaTake in an input, process the information (for example: $z = w * x + b$), give an output(for example using activation functions).">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-02T02:23:44.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Udacity Self-driving Car - Neural Networks: 1. Fundamentals">
+<meta name="twitter:description" content="Main ideaTake in an input, process the information (for example: $z = w * x + b$), give an output(for example using activation functions).">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dongzhenhuangfu.github.io/2019/04/08/Udacity-Self-driving-Car-Neural-Networks-1-Fundamentals/">
+
+
+
+
+
+  <title>Udacity Self-driving Car - Neural Networks: 1. Fundamentals | 皇甫二小</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">皇甫二小</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">带着赤子的骄傲</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dongzhenhuangfu.github.io/2019/04/08/Udacity-Self-driving-Car-Neural-Networks-1-Fundamentals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wyatt Huangfu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="皇甫二小">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Udacity Self-driving Car - Neural Networks: 1. Fundamentals</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-08T11:02:29+02:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Udacity-Nanodegree-Self-Driving-Car/" itemprop="url" rel="index">
+                    <span itemprop="name">Udacity Nanodegree Self-Driving Car</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Main-idea"><a href="#Main-idea" class="headerlink" title="Main idea"></a>Main idea</h1><p>Take in an input, process the information (for example: $z = w * x + b$), give an output(for example using activation functions).<br><a id="more"></a></p>
+<h1 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h1><p>An artificial neurons, the basic unit of a neural network, each takes in an input data and decides how to react to(categorize) that data.  </p>
+<h1 id="Weights-and-bias"><a href="#Weights-and-bias" class="headerlink" title="Weights and bias"></a>Weights and bias</h1><ul>
+<li>The input of the perceptron will be multiplied by a weight value, this weight will be tuned later for a better result w.r.t. the output evaluation.  </li>
+<li>Higher weight means the network considers that input is more important.  </li>
+<li>The bias is a value which will be added to the multiplied result, also tunable.  </li>
+</ul>
+<h1 id="Activation-functions"><a href="#Activation-functions" class="headerlink" title="Activation functions"></a>Activation functions</h1><p>Activation functions are functions which decide the output of the node.<br>The most common activation functions are: Sigmoid , ReLu , Tanh  and softmax, where the first three activation functions follow the formulas below and the softmax function (see below) is used for the multi-class classifications and output the possibility of this result.<br>Sigmoid: $f(z) = \frac{1}{1 + e^{-z}}$<br>ReLU:    $f(z) = \max(0, z)$<br>tanh:    $f(z) = \tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}$  </p>
+<h1 id="Softmax-function"><a href="#Softmax-function" class="headerlink" title="Softmax function"></a>Softmax function</h1><p>The softmax function is also called normalized exponential function, it is used for transforming the from the model calculated value into the probability distribution of the different classes.<br>For example, a model needs to predict the color of the input and there are three options: red, green and blue. The output value from the model of this three options are: $2$, $9$ and $0$, now the model needs to transform the value into the probability for the further prediction, the corresponding distribution of the probability has the following rules:  </p>
+<ol>
+<li>The probability needs to be positive.  </li>
+<li>The summary of the probability should be equal to $1$.  </li>
+<li>The class with higher value has the higher probability.  </li>
+</ol>
+<p>To achieve this, the transformation can be realized by the equation:  </p>
+<script type="math/tex; mode=display">P(A_i) = \frac{e^{Z_i}}{\sum^{n}_{j=1} e^{Z_j}}</script><p>Where $P(A_i)$ is the probability for classifying this input to the Class $A_i$, $Z_i$ is the output value from the model of the $i$th class, $n$ is the number of the classes.<br>For the prediction, the model classifies the input to the class with the maximum probability.</p>
+<h1 id="Perception-Algorithm"><a href="#Perception-Algorithm" class="headerlink" title="Perception Algorithm"></a>Perception Algorithm</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Find a line <script type="math/tex">w * x + b * y + c = 0</script> that separates the samples.</p>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><ul>
+<li>Start with random weights and bias: a, b, c.  </li>
+<li>For every misclassified points:  <ul>
+<li>If the point is under the line: <script type="math/tex">a += \alpha * x_i%, $b += \alpha * y_i$, $c += \alpha</script>.  </li>
+<li>If the point is above the line: <script type="math/tex">a -= \alpha * x_i%, $b -= \alpha * y_i$, $c -= \alpha</script>.  </li>
+</ul>
+</li>
+</ul>
+<p>Note: The $\alpha$ here should be defined by the user.  </p>
+<h1 id="Error-Functions"><a href="#Error-Functions" class="headerlink" title="Error Functions"></a>Error Functions</h1><h2 id="Conditions-to-be-met"><a href="#Conditions-to-be-met" class="headerlink" title="Conditions to be met"></a>Conditions to be met</h2><ol>
+<li>differentiable.  </li>
+<li>continuous. </li>
+</ol>
+<h1 id="Cross-Entropy"><a href="#Cross-Entropy" class="headerlink" title="Cross Entropy"></a>Cross Entropy</h1><h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><script type="math/tex; mode=display">\sum^{n}_{j=1} -ln(P_j)</script><p>Note: Smaller cross entropy means higher probability.  </p>
+<h1 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h1><h2 id="Mainly-steps"><a href="#Mainly-steps" class="headerlink" title="Mainly steps:"></a>Mainly steps:</h2><ol>
+<li>Take the data.  </li>
+<li>Pick a random model.  </li>
+<li>Calculate the error. </li>
+<li>Minimize the error, and obtain a better model.  </li>
+</ol>
+<h1 id="Gradient-Descent-Algorithm"><a href="#Gradient-Descent-Algorithm" class="headerlink" title="Gradient Descent Algorithm"></a>Gradient Descent Algorithm</h1><h2 id="Main-idea-1"><a href="#Main-idea-1" class="headerlink" title="Main idea:"></a>Main idea:</h2><p>Take the negative of the gradient of the error function as the moving direction, use the learning rate to avoid dramatic changes.</p>
+<script type="math/tex; mode=display">w_{i}' -= \alpha * \frac{\partial E}{\partial w_i}</script><p>Where $w_i$ means the i-th weight, and $E$ means the error.  </p>
+<h1 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h1><h2 id="Main-idea-2"><a href="#Main-idea-2" class="headerlink" title="Main idea"></a>Main idea</h2><p>The linear combination of the output from the last models (cells).  </p>
+<h2 id="Feedforward"><a href="#Feedforward" class="headerlink" title="Feedforward"></a>Feedforward</h2><p>Take input, get the output of each layers.</p>
+<h2 id="Mathematical-Knowledges"><a href="#Mathematical-Knowledges" class="headerlink" title="Mathematical Knowledges:"></a>Mathematical Knowledges:</h2><p><a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces/vectors/v/vector-introduction-linear-algebra" target="_blank" rel="noopener">Introduction to vectors</a><br><a href="https://www.khanacademy.org/math/precalculus/precalc-matrices" target="_blank" rel="noopener">Introduction to matrices</a><br><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction" target="_blank" rel="noopener">Chain rules</a>  </p>
+<h1 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h1><h2 id="Main-idea-3"><a href="#Main-idea-3" class="headerlink" title="Main idea"></a>Main idea</h2><p>Update the parameters in each layers with regard to the error function.<br>Gradient of the error function:</p>
+<script type="math/tex; mode=display">\nabla E = (\frac{\partial E}{\partial w_{11}}, ... , \frac{\partial E}{\partial w_{mn}}, \frac{\partial E}{\partial b_1}, ... , \frac{\partial E}{\partial b_m})</script><h2 id="Main-steps"><a href="#Main-steps" class="headerlink" title="Main steps"></a>Main steps</h2><ol>
+<li>Doing a feedforward operation.  </li>
+<li>Comparing the output of the model with the desired output and calculating the error.  </li>
+<li>Running the feedforward operation backwards (backpropagation) to spread the error to each of the weights.  </li>
+<li>Use this to update the weights, and get a better model.  </li>
+<li>Continue this until we have a model that is good.  </li>
+</ol>
+<h1 id="Further-Reading"><a href="#Further-Reading" class="headerlink" title="Further Reading"></a>Further Reading</h1><p><a href="https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b#.vt3ax2kg9" target="_blank" rel="noopener">Yes, you should understand backprop</a><br><a href="https://www.youtube.com/watch?v=59Hbtz7XgjM" target="_blank" rel="noopener">a lecture from Stanford’s CS231n course</a>  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-learning/" rel="tag"># Deep learning</a>
+          
+            <a href="/tags/Machine-learning/" rel="tag"># Machine learning</a>
+          
+            <a href="/tags/Neural-networks/" rel="tag"># Neural networks</a>
+          
+            <a href="/tags/Self-driving/" rel="tag"># Self driving</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/09/Udacity-Self-driving-Car-Neural-Networks-2-Introduction-to-TensorFlow/" rel="prev" title="Udacity Self-driving Car - Neural Networks: 2. Introduction to TensorFlow">
+                Udacity Self-driving Car - Neural Networks: 2. Introduction to TensorFlow <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Wyatt Huangfu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Main-idea"><span class="nav-number">1.</span> <span class="nav-text">Main idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Perceptron"><span class="nav-number">2.</span> <span class="nav-text">Perceptron</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weights-and-bias"><span class="nav-number">3.</span> <span class="nav-text">Weights and bias</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Activation-functions"><span class="nav-number">4.</span> <span class="nav-text">Activation functions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Softmax-function"><span class="nav-number">5.</span> <span class="nav-text">Softmax function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Perception-Algorithm"><span class="nav-number">6.</span> <span class="nav-text">Perception Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">6.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">6.2.</span> <span class="nav-text">Algorithm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-Functions"><span class="nav-number">7.</span> <span class="nav-text">Error Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditions-to-be-met"><span class="nav-number">7.1.</span> <span class="nav-text">Conditions to be met</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cross-Entropy"><span class="nav-number">8.</span> <span class="nav-text">Cross Entropy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">8.1.</span> <span class="nav-text">Function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic-Regression"><span class="nav-number">9.</span> <span class="nav-text">Logistic Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mainly-steps"><span class="nav-number">9.1.</span> <span class="nav-text">Mainly steps:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent-Algorithm"><span class="nav-number">10.</span> <span class="nav-text">Gradient Descent Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-idea-1"><span class="nav-number">10.1.</span> <span class="nav-text">Main idea:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Neural-Network"><span class="nav-number">11.</span> <span class="nav-text">Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-idea-2"><span class="nav-number">11.1.</span> <span class="nav-text">Main idea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feedforward"><span class="nav-number">11.2.</span> <span class="nav-text">Feedforward</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mathematical-Knowledges"><span class="nav-number">11.3.</span> <span class="nav-text">Mathematical Knowledges:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Backpropagation"><span class="nav-number">12.</span> <span class="nav-text">Backpropagation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-idea-3"><span class="nav-number">12.1.</span> <span class="nav-text">Main idea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-steps"><span class="nav-number">12.2.</span> <span class="nav-text">Main steps</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Further-Reading"><span class="nav-number">13.</span> <span class="nav-text">Further Reading</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wyatt Huangfu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
